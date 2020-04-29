@@ -6,6 +6,7 @@ COPY . ./
 # RUN npm config set registry https://registry.npmjs.org/
 
 RUN yarn install
+RUN yarn build
 
 EXPOSE 3000
 
@@ -20,5 +21,5 @@ COPY --from=build public ./public
 COPY --from=build scripts ./scripts
 COPY --from=build node_modules ./node_modules
 
-COPY --from=build src ./src
-CMD npm run start
+COPY --from=build build ./build
+CMD yarn serve
