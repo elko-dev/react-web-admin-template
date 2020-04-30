@@ -1,9 +1,12 @@
+ARG APP_NAME="myapp"
+
 FROM node:12 AS build
 
 COPY . ./
 
-# potential performance optimization from https://github.com/npm/npm/issues/8836
-# RUN npm config set registry https://registry.npmjs.org/
+ARG APP_NAME
+ENV REACT_APP_APP_NAME=$APP_NAME
+RUN echo "ARGS is ${REACT_APP_APP_NAME}"
 
 RUN yarn install
 RUN yarn build
@@ -14,8 +17,10 @@ EXPOSE 3000
 FROM node:12
 COPY package.json ./
 
-
-## Move the UI server into ./dist, and create a public/ folder to serve from
+ARG APP_NAME
+ENV REACT_APP_APP_NAME=$APP_NAME
+RUN echo "ARGS is ${REACT_APP_APP_NAME}"
+# Move the UI server into ./build, and create a public/ folder to serve from
 COPY --from=build public ./public
 # Need to do this so the Firebase config can be generated at runtime (don't have to keep static credentials)
 COPY --from=build scripts ./scripts
