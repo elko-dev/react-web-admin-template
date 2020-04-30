@@ -1,4 +1,26 @@
+const key: string | undefined = process.env.REACT_APP_ENV;
+
+type urlOptions = {
+    [key: string]: string
+}
+const urlMap: urlOptions = {
+    'local': 'http://localhost:4000',
+    'dev': '<DEV_BASE_URL>',
+    'stage': '<STAGE_BASE_URL>',
+    'prod': '<PROD_BASE_URL>'
+}
+
 
 export const environment = {
-    apiBase: `https://${process.env.REACT_APP_APP_NAME}.herokuapp.com`,
+
+    apiBase: getUrl(),
 };
+
+function getUrl(): string{
+    if(!key){
+        console.error('REACT_APP_ENV variable was undefined.  We need this to select the correct environment specific variables');
+        process.exit(1);
+    }
+    console.log(key);
+    return urlMap[key];
+}

@@ -1,12 +1,12 @@
-ARG APP_NAME="myapp"
+ARG REACT_APP_ENV="dev"
 
 FROM node:12 AS build
 
 COPY . ./
 
-ARG APP_NAME
-ENV REACT_APP_APP_NAME=$APP_NAME
-RUN echo "ARGS is ${REACT_APP_APP_NAME}"
+ARG REACT_APP_ENV
+ENV REACT_APP_ENV=$REACT_APP_ENV
+RUN echo "ARGS is ${REACT_APP_ENV}"
 
 RUN yarn install
 RUN yarn build
@@ -17,9 +17,9 @@ EXPOSE 3000
 FROM node:12
 COPY package.json ./
 
-ARG APP_NAME
-ENV REACT_APP_APP_NAME=$APP_NAME
-RUN echo "ARGS is ${REACT_APP_APP_NAME}"
+ARG REACT_APP_ENV
+ENV REACT_APP_ENV=$REACT_APP_ENV
+RUN echo "ARGS is ${REACT_APP_ENV}"
 # Move the UI server into ./build, and create a public/ folder to serve from
 COPY --from=build public ./public
 # Need to do this so the Firebase config can be generated at runtime (don't have to keep static credentials)
