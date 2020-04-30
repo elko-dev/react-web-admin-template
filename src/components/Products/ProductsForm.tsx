@@ -1,32 +1,30 @@
 import React, { useState, FormEvent, Dispatch, Fragment } from "react";
-import { IStateType, IProductState } from "../../store/models/root.interface";
+import { IStateType, ILocationState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
-import { IProduct, ProductModificationStatus } from "../../store/models/product.interface";
+import { ILocation, ProductModificationStatus } from "../../store/models/product.interface";
 import TextInput from "../../common/components/TextInput";
 import { editProduct, clearSelectedProduct, setModificationState, addProduct } from "../../store/actions/products.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import Checkbox from "../../common/components/Checkbox";
 import SelectInput from "../../common/components/Select";
-import { OnChangeModel, IProductFormState } from "../../common/types/Form.types";
+import { OnChangeModel, ILocationFormState } from "../../common/types/Form.types";
 
 const ProductForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  const products: IProductState | null = useSelector((state: IStateType) => state.products);
-  let product: IProduct | null = products.selectedProduct;
+  const products: ILocationState | null = useSelector((state: IStateType) => state.locations);
+  let location: ILocation | null = products.selectedProduct;
   const isCreate: boolean = (products.modificationState === ProductModificationStatus.Create);
-  
-  if (!product || isCreate) {
-    product = { id: 0, name: "", description: "", amount: 0, price: 0, hasExpiryDate: false, category: "" };
+
+  if (!location || isCreate) {
+    location = { id: 0, name: "", description: "", latitude: 0, longitude: 0 };
   }
 
   const [formState, setFormState] = useState({
-    name: { error: "", value: product.name },
-    description: { error: "", value: product.description },
-    amount: { error: "", value: product.amount },
-    price: { error: "", value: product.price },
-    hasExpiryDate: { error: "", value: product.hasExpiryDate },
-    category: { error: "", value: product.category }
+    name: { error: "", value: location.name },
+    description: { error: "", value: location.description },
+    latitude: { error: "", value: location.latitude },
+    longitude: { error: "", value: location.longitude },
   });
 
   function hasFormValueChanged(model: OnChangeModel): void {
@@ -43,16 +41,14 @@ const ProductForm: React.FC = () => {
     saveForm(formState, saveUserFn);
   }
 
-  function saveForm(formState: IProductFormState, saveFn: Function): void {
-    if (product) {
+  function saveForm(formState: ILocationFormState, saveFn: Function): void {
+    if (location) {
       dispatch(saveFn({
-        ...product,
+        ...location,
         name: formState.name.value,
         description: formState.description.value,
-        price: formState.price.value,
-        amount: formState.amount.value,
-        hasExpiryDate: formState.hasExpiryDate.value,
-        category: formState.category.value
+        latitude: formState.latitude.value,
+        longitude: formState.longitude.value,
       }));
 
       dispatch(addNotification("Product edited", `Product ${formState.name.value} edited by you`));
@@ -71,17 +67,16 @@ const ProductForm: React.FC = () => {
   }
 
   function isFormInvalid(): boolean {
-    return (formState.amount.error || formState.description.error
-      || formState.name.error || formState.price.error || formState.hasExpiryDate.error
-      || formState.category.error || !formState.name.value || !formState.category.value) as boolean;
-}
+    return (formState.latitude.error || formState.description.error
+      || formState.name.error || formState.longitude.error || !formState.name.value) as boolean;
+  }
 
   return (
     <Fragment>
       <div className="col-xl-7 col-lg-7">
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-green">Product {(isCreate ? "create" : "edit")}</h6>
+            <h6 className="m-0 font-weight-bold text-green">Location {(isCreate ? "create" : "edit")}</h6>
           </div>
           <div className="card-body">
             <form onSubmit={saveUser}>
@@ -96,21 +91,10 @@ const ProductForm: React.FC = () => {
                     label="Name"
                     placeholder="Name" />
                 </div>
-                <div className="form-group col-md-6">
-                  <SelectInput
-                    id="input_category"
-                    field="category"
-                    label="Category"
-                    options={["Fruit", "Sweet", "Kitchen"]}
-                    required={true}
-                    onChange={hasFormValueChanged}
-                    value={formState.category.value}
-                  />
-                </div>
               </div>
               <div className="form-group">
                 <TextInput id="input_description"
-                field = "description"
+                  field="description"
                   value={formState.description.value}
                   onChange={hasFormValueChanged}
                   required={false}
@@ -120,32 +104,21 @@ const ProductForm: React.FC = () => {
               </div>
               <div className="form-row">
                 <div className="form-group col-md-6">
-                  <NumberInput id="input_amount"
-                    value={formState.amount.value}
-                    field="amount"
+                  <NumberInput id="input_latitude"
+                    value={formState.latitude.value}
+                    field="latitude"
                     onChange={hasFormValueChanged}
-                    max={1000}
                     min={0}
-                    label="Amount" />
+                    label="Latitude" />
                 </div>
                 <div className="form-group col-md-6">
-                  <NumberInput id="input_price"
-                    value={formState.price.value}
-                    field="price"
+                  <NumberInput id="input_longitude"
+                    value={formState.longitude.value}
+                    field="longitude"
                     onChange={hasFormValueChanged}
-                    max={1000}
                     min={0}
-                    label="Price" />
+                    label="Longitude" />
                 </div>
-              </div>
-              <div className="form-group">
-                <Checkbox
-                  id="checkbox_expiry"
-                  field="hasExpiryDate"
-                  value={formState.hasExpiryDate.value}
-                  label="Has expiry date"
-                  onChange={hasFormValueChanged}
-                />
               </div>
               <button className="btn btn-danger" onClick={() => cancelForm()}>Cancel</button>
               <button type="submit" className={`btn btn-success left-margin ${getDisabledClass()}`}>Save</button>

@@ -1,28 +1,28 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { IStateType, IProductState } from "../../store/models/root.interface";
-import { IProduct } from "../../store/models/product.interface";
+import { IStateType, ILocationState } from "../../store/models/root.interface";
+import { ILocation } from "../../store/models/product.interface";
 
 export type productListProps = {
-  onSelect?: (product: IProduct) => void;
+  onSelect?: (product: ILocation) => void;
   children?: React.ReactNode;
 };
 
-function ProductList(props: productListProps): JSX.Element  {
-  const products: IProductState = useSelector((state: IStateType) => state.products);
+function LocationList(props: productListProps): JSX.Element {
+  const products: ILocationState = useSelector((state: IStateType) => state.locations);
 
-  const productElements: (JSX.Element | null)[] = products.products.map(product => {
+  const productElements: (JSX.Element | null)[] = products.locations.map(product => {
     if (!product) { return null; }
     return (<tr className={`table-row ${(products.selectedProduct && products.selectedProduct.id === product.id) ? "selected" : ""}`}
       onClick={() => {
-        if(props.onSelect) props.onSelect(product);
+        if (props.onSelect) props.onSelect(product);
       }}
       key={`product_${product.id}`}>
       <th scope="row">{product.id}</th>
       <td>{product.name}</td>
-      <td>{product.category}</td>
-      <td>{product.amount}</td>
-      <td>{product.price}</td>
+      <td>{product.description}</td>
+      <td>{product.latitude}</td>
+      <td>{product.longitude}</td>
     </tr>);
   });
 
@@ -33,10 +33,10 @@ function ProductList(props: productListProps): JSX.Element  {
         <thead className="thead-light">
           <tr>
             <th scope="col">#</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longitude</th>
             <th scope="col">Name</th>
-            <th scope="col">Category</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Price</th>
+            <th scope="col">Description</th>
           </tr>
         </thead>
         <tbody>
@@ -48,4 +48,4 @@ function ProductList(props: productListProps): JSX.Element  {
   );
 }
 
-export default ProductList;
+export default LocationList;

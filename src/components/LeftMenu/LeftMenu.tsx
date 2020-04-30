@@ -33,30 +33,12 @@ const LeftMenu: React.FC = () => {
 
                 <hr className="sidebar-divider my-0" />
 
-                <li className="nav-item active">
-
-                    <Link className="nav-link" to="Home">
-                        <i className="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </Link>
-                </li>
-
                 <hr className="sidebar-divider" />
-                <div className="sidebar-heading">
-                    Warehouse
-                </div>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/products`}>
+                    <Link className="nav-link" to={`/locations`}>
                         <i className="fas fa-fw fa-warehouse"></i>
-                        <span>Products</span>
-                    </Link>
-                </li>
-
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/orders`}>
-                        <i className="fas fa-fw fa-dollar-sign"></i>
-                        <span>Orders</span>
+                        <span>Locations</span>
                     </Link>
                 </li>
 

@@ -1,9 +1,9 @@
-import { IProduct } from "./product.interface";
+import { ILocation } from "./product.interface";
 
 export interface IOrder {
     id: number;
     name: string;
-    product: IProduct;
+    product: ILocation;
     amount: number;
     totalPrice: number;
 }

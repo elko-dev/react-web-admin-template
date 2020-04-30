@@ -1,11 +1,9 @@
-export interface IProduct {
+export interface ILocation {
     id: number;
     name: string;
-    category: string;
     description: string;
-    amount: number;
-    price: number;
-    hasExpiryDate: boolean;
+    latitude: number;
+    longitude: number;
 }
 
 export enum ProductModificationStatus {

@@ -1,24 +1,21 @@
 import React, { Fragment, Dispatch, useState, useEffect } from "react";
-import ProductList from "./ProductsList";
+import LocationList from "./ProductsList";
 import ProductForm from "./ProductsForm";
 import TopCard from "../../common/components/TopCard";
 import "./Products.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentPath } from "../../store/actions/root.actions";
-import { IProductState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
+import { ILocationState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
 import Popup from "reactjs-popup";
 import { removeProduct, clearSelectedProduct, setModificationState,
   changeSelectedProduct } from "../../store/actions/products.action";
 import { addNotification } from "../../store/actions/notifications.action";
-import { ProductModificationStatus, IProduct } from "../../store/models/product.interface";
+import { ProductModificationStatus, ILocation } from "../../store/models/product.interface";
 
-const Products: React.FC = () => {
+const Locations: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  const products: IProductState = useSelector((state: IStateType) => state.products);
+  const locations: ILocationState = useSelector((state: IStateType) => state.locations);
   const path: IRootPageStateType = useSelector((state: IStateType) => state.root.page);
-  const numberItemsCount: number = products.products.length;
-  const totalPrice: number = products.products.reduce((prev, next) => prev + ((next.price * next.amount) || 0), 0);
-  const totalAmount: number = products.products.reduce((prev, next) => prev + (next.amount || 0), 0);
   const [popup, setPopup] = useState(false);
 
   useEffect(() => {
@@ -26,32 +23,26 @@ const Products: React.FC = () => {
     dispatch(updateCurrentPath("products", "list"));
   }, [path.area, dispatch]);
 
-  function onProductSelect(product: IProduct): void {
+  function onProductSelect(product: ILocation): void {
     dispatch(changeSelectedProduct(product));
     dispatch(setModificationState(ProductModificationStatus.None));
   }
 
   function onProductRemove() {
-    if(products.selectedProduct) {
+    if(locations.selectedProduct) {
       setPopup(true);
     }
   }
 
   return (
     <Fragment>
-      <h1 className="h3 mb-2 text-gray-800">Products</h1>
-      <p className="mb-4">Products here</p>
-      <div className="row">
-        <TopCard title="PRODUCT COUNT" text={`${numberItemsCount}`} icon="box" class="primary" />
-        <TopCard title="PRODUCT AMOUNT" text={`${totalAmount}`} icon="warehouse" class="danger" />
-        <TopCard title="SUMMARY PRICE" text={`$${totalPrice}`} icon="dollar-sign" class="success" />
-      </div>
+      <h1 className="h3 mb-2 text-gray-800">Locations</h1>
+      <p className="mb-4"></p>
 
       <div className="row">
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Product List</h6>
               <div className="header-buttons">
                 <button className="btn btn-success btn-green" onClick={() =>
                   dispatch(setModificationState(ProductModificationStatus.Create))}>
@@ -67,14 +58,14 @@ const Products: React.FC = () => {
               </div>
             </div>
             <div className="card-body">
-              <ProductList
+              <LocationList
                 onSelect={onProductSelect}
               />
             </div>
           </div>
         </div>
-        {((products.modificationState === ProductModificationStatus.Create)
-          || (products.modificationState === ProductModificationStatus.Edit && products.selectedProduct)) ?
+        {((locations.modificationState === ProductModificationStatus.Create)
+          || (locations.modificationState === ProductModificationStatus.Edit && locations.selectedProduct)) ?
           <ProductForm /> : null}
       </div>
 
@@ -93,11 +84,11 @@ const Products: React.FC = () => {
             <button type="button"
               className="btn btn-danger"
               onClick={() => {
-                if (!products.selectedProduct) {
+                if (!locations.selectedProduct) {
                   return;
                 }
-                dispatch(addNotification("Product removed", `Product ${products.selectedProduct.name} was removed`));
-                dispatch(removeProduct(products.selectedProduct.id));
+                dispatch(addNotification("Product removed", `Product ${locations.selectedProduct.name} was removed`));
+                dispatch(removeProduct(locations.selectedProduct.id));
                 dispatch(clearSelectedProduct());
                 setPopup(false);
               }}>Remove
@@ -109,4 +100,4 @@ const Products: React.FC = () => {
   );
 };
 
-export default Products;
+export default Locations;

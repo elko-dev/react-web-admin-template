@@ -1,4 +1,4 @@
-import { IProduct, ProductModificationStatus } from "./product.interface";
+import { ILocation, ProductModificationStatus } from "./product.interface";
 import { INotification } from "./notification.interface";
 import { IUser } from "./user.interface";
 import { IOrder } from "./order.interface";
@@ -14,16 +14,15 @@ export interface IRootStateType {
 }
 export interface IStateType {
     root: IRootStateType;
-    products: IProductState;
+    locations: ILocationState;
     notifications: INotificationState;
     users: IUserState;
-    orders: IOrdersState;
     account: IAccount;
 }
 
-export interface IProductState {
-    products: IProduct[];
-    selectedProduct: IProduct | null;
+export interface ILocationState {
+    locations: ILocation[];
+    selectedProduct: ILocation | null;
     modificationState: ProductModificationStatus;
 }
 
