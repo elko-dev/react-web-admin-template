@@ -13,7 +13,7 @@ function LocationList(props: productListProps): JSX.Element {
 
   const productElements: (JSX.Element | null)[] = products.locations.map(product => {
     if (!product) { return null; }
-    return (<tr className={`table-row ${(products.selectedProduct && products.selectedProduct.id === product.id) ? "selected" : ""}`}
+    return (<tr className={`table-row ${(products.selectedLocation && products.selectedLocation.id === product.id) ? "selected" : ""}`}
       onClick={() => {
         if (props.onSelect) props.onSelect(product);
       }}

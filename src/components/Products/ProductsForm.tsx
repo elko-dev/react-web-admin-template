@@ -6,14 +6,12 @@ import TextInput from "../../common/components/TextInput";
 import { editProduct, clearSelectedProduct, setModificationState, addProduct } from "../../store/actions/products.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
-import Checkbox from "../../common/components/Checkbox";
-import SelectInput from "../../common/components/Select";
 import { OnChangeModel, ILocationFormState } from "../../common/types/Form.types";
 
 const ProductForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const products: ILocationState | null = useSelector((state: IStateType) => state.locations);
-  let location: ILocation | null = products.selectedProduct;
+  let location: ILocation | null = products.selectedLocation;
   const isCreate: boolean = (products.modificationState === ProductModificationStatus.Create);
 
   if (!location || isCreate) {
@@ -108,7 +106,7 @@ const ProductForm: React.FC = () => {
                     value={formState.latitude.value}
                     field="latitude"
                     onChange={hasFormValueChanged}
-                    min={0}
+                    min={-100}
                     label="Latitude" />
                 </div>
                 <div className="form-group col-md-6">
@@ -116,7 +114,7 @@ const ProductForm: React.FC = () => {
                     value={formState.longitude.value}
                     field="longitude"
                     onChange={hasFormValueChanged}
-                    min={0}
+                    min={-100}
                     label="Longitude" />
                 </div>
               </div>

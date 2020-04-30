@@ -22,7 +22,7 @@ export interface IStateType {
 
 export interface ILocationState {
     locations: ILocation[];
-    selectedProduct: ILocation | null;
+    selectedLocation: ILocation | null;
     modificationState: ProductModificationStatus;
 }
 

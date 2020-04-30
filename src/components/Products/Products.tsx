@@ -29,7 +29,7 @@ const Locations: React.FC = () => {
   }
 
   function onProductRemove() {
-    if(locations.selectedProduct) {
+    if(locations.selectedLocation) {
       setPopup(true);
     }
   }
@@ -65,7 +65,7 @@ const Locations: React.FC = () => {
           </div>
         </div>
         {((locations.modificationState === ProductModificationStatus.Create)
-          || (locations.modificationState === ProductModificationStatus.Edit && locations.selectedProduct)) ?
+          || (locations.modificationState === ProductModificationStatus.Edit && locations.selectedLocation)) ?
           <ProductForm /> : null}
       </div>
 
@@ -84,11 +84,11 @@ const Locations: React.FC = () => {
             <button type="button"
               className="btn btn-danger"
               onClick={() => {
-                if (!locations.selectedProduct) {
+                if (!locations.selectedLocation) {
                   return;
                 }
-                dispatch(addNotification("Product removed", `Product ${locations.selectedProduct.name} was removed`));
-                dispatch(removeProduct(locations.selectedProduct.id));
+                dispatch(addNotification("Product removed", `Product ${locations.selectedLocation.name} was removed`));
+                dispatch(removeProduct(locations.selectedLocation.id));
                 dispatch(clearSelectedProduct());
                 setPopup(false);
               }}>Remove
