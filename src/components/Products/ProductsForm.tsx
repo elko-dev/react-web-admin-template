@@ -1,12 +1,13 @@
-import React, { useState, FormEvent, Dispatch, Fragment } from "react";
+import React, { useState, FormEvent, Dispatch, Fragment, useEffect } from "react";
 import { IStateType, ILocationState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { ILocation, ProductModificationStatus } from "../../store/models/product.interface";
 import TextInput from "../../common/components/TextInput";
-import { editProduct, clearSelectedProduct, setModificationState, addProduct } from "../../store/actions/products.action";
+import { editProduct, clearSelectedProduct, setModificationState, addProduct, loadLocations } from "../../store/actions/products.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, ILocationFormState } from "../../common/types/Form.types";
+import { createLocation, fetchLocations } from "../../store/reducers/products.reducer";
 
 const ProductForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();
@@ -35,7 +36,7 @@ const ProductForm: React.FC = () => {
       return;
     }
 
-    let saveUserFn: Function = (isCreate) ? addProduct : editProduct;
+    let saveUserFn: Function = (isCreate) ? createLocation : editProduct;
     saveForm(formState, saveUserFn);
   }
 

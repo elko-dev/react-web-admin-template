@@ -6,9 +6,14 @@ export const CHANGE_PRODUCT_AMOUNT: string = "CHANGE_PRODUCT_AMOUNT";
 export const CHANGE_PRODUCT_PENDING_EDIT: string = "CHANGE_PRODUCT_PENDING_EDIT";
 export const CLEAR_PRODUCT_PENDING_EDIT: string = "CLEAR_PRODUCT_PENDING_EDIT";
 export const SET_MODIFICATION_STATE: string = "SET_MODIFICATION_STATE";
+export const LOAD_LOCATIONS: string = "LOAD_LOCATIONS";
 
 export function addProduct(product: ILocation): IAddProductActionType {
     return { type: ADD_PRODUCT, product: product };
+}
+
+export function loadLocations(products: ILocation[]): ILoadLocations {
+    return { type: LOAD_LOCATIONS, products: products };
 }
 
 export function editProduct(product: ILocation): IEditProductActionType {
@@ -36,6 +41,7 @@ export function setModificationState(value: ProductModificationStatus): ISetModi
 }
 
 interface IAddProductActionType { type: string, product: ILocation };
+interface ILoadLocations { type: string, products: ILocation[] };
 interface IEditProductActionType { type: string, product: ILocation };
 interface IRemoveProductActionType { type: string, id: number };
 interface IChangeSelectedProductActionType { type: string, product: ILocation };
