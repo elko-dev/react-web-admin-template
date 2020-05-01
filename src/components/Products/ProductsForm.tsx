@@ -50,7 +50,7 @@ const ProductForm: React.FC = () => {
         longitude: formState.longitude.value,
       }));
 
-      dispatch(addNotification("Product edited", `Product ${formState.name.value} edited by you`));
+      dispatch(addNotification("Product edited", `Location ${formState.name.value} added by you`));
       dispatch(clearSelectedProduct());
       dispatch(setModificationState(ProductModificationStatus.None));
     }

@@ -33,10 +33,10 @@ function LocationList(props: productListProps): JSX.Element {
         <thead className="thead-light">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Latitude</th>
-            <th scope="col">Longitude</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longitude</th>
           </tr>
         </thead>
         <tbody>
