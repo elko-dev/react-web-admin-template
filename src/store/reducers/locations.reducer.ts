@@ -2,10 +2,10 @@ import { ILocationState, IActionBase } from "../models/root.interface";
 import {
     ADD_PRODUCT, CHANGE_PRODUCT_PENDING_EDIT, EDIT_PRODUCT, REMOVE_PRODUCT,
     CLEAR_PRODUCT_PENDING_EDIT, SET_MODIFICATION_STATE, CHANGE_PRODUCT_AMOUNT
-} from "../actions/products.action";
+} from "../actions/locations.action";
 import { ILocation, ProductModificationStatus } from "../models/product.interface";
 import { LocationService, LocationRequest } from "../../service/LocationService";
-import * as actions from '../actions/products.action';
+import * as actions from '../actions/locations.action';
 
 
 export function createLocation(location: ILocation) {

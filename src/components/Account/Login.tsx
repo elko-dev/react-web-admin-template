@@ -1,11 +1,16 @@
 import React, { useState, FormEvent, Dispatch } from "react";
 import { OnChangeModel } from "../../common/types/Form.types";
-import { useDispatch } from "react-redux";
-import { login } from "../../store/actions/account.actions";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../store/reducers/account.reducer";
 import TextInput from "../../common/components/TextInput";
+import { IAccount } from "../../store/models/account.interface";
+import { IStateType } from "../../store/models/root.interface";
+import { Redirect } from "react-router-dom";
 
 const Login: React.FC = () => {
+
   const dispatch: Dispatch<any> = useDispatch();
+  const account: IAccount = useSelector((state: IStateType) => state.account);
 
   const [formState, setFormState] = useState({
     email: { error: "", value: "" },
@@ -18,8 +23,8 @@ const Login: React.FC = () => {
 
   function submit(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault();
-    if(isFormInvalid()) { return; }
-    dispatch(login(formState.email.value));
+    if (isFormInvalid()) { return; }
+    dispatch(loginUser(formState.email.value, formState.password.value));
   }
 
   function isFormInvalid() {
@@ -33,8 +38,15 @@ const Login: React.FC = () => {
   }
 
   return (
-
     <div className="container">
+      {account.loggedIn ?
+        <Redirect
+          to={{
+            pathname: "/"
+          }}
+        />
+        : null}
+
       <div className="row justify-content-center">
         <div className="col-xl-10 col-lg-12 col-md-9">
           <div className="card o-hidden border-0 shadow-lg my-5">

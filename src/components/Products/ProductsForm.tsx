@@ -3,11 +3,11 @@ import { IStateType, ILocationState } from "../../store/models/root.interface";
 import { useSelector, useDispatch } from "react-redux";
 import { ILocation, ProductModificationStatus } from "../../store/models/product.interface";
 import TextInput from "../../common/components/TextInput";
-import { editProduct, clearSelectedProduct, setModificationState, addProduct, loadLocations } from "../../store/actions/products.action";
+import { editProduct, clearSelectedProduct, setModificationState, addProduct, loadLocations } from "../../store/actions/locations.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import NumberInput from "../../common/components/NumberInput";
 import { OnChangeModel, ILocationFormState } from "../../common/types/Form.types";
-import { createLocation, fetchLocations } from "../../store/reducers/products.reducer";
+import { createLocation, fetchLocations } from "../../store/reducers/locations.reducer";
 
 const ProductForm: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch();

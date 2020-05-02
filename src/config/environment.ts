@@ -4,7 +4,7 @@ type urlOptions = {
     [key: string]: string
 }
 const urlMap: urlOptions = {
-    'local': 'http://localhost:4000',
+    'local': 'https://freethrow-api-dev.herokuapp.com',
     'dev': '<DEV_BASE_URL>',
     'stage': '<STAGE_BASE_URL>',
     'prod': '<PROD_BASE_URL>'

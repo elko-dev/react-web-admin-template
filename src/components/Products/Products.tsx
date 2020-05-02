@@ -8,7 +8,7 @@ import { updateCurrentPath } from "../../store/actions/root.actions";
 import { ILocationState, IStateType, IRootPageStateType } from "../../store/models/root.interface";
 import Popup from "reactjs-popup";
 import { removeProduct, clearSelectedProduct, setModificationState,
-  changeSelectedProduct } from "../../store/actions/products.action";
+  changeSelectedProduct } from "../../store/actions/locations.action";
 import { addNotification } from "../../store/actions/notifications.action";
 import { ProductModificationStatus, ILocation } from "../../store/models/product.interface";
 

@@ -16,6 +16,8 @@
     "@types/redux-thunk": "^2.1.0",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "firebase": "^7.14.2",
+    "googleapis": "^49.0.0",
     "graphql-request": "^1.8.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
@@ -26,6 +28,7 @@
     "reactjs-popup": "^1.5.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "request-promise": "^4.2.5",
     "serve": "^11.3.0",
     "typescript": "^3.7.0-beta"
   },
@@ -34,7 +37,10 @@
     "serve": "./scripts/serve.sh",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false --passWithNoTests",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "decode-firebase-config": "./scripts/secret_decode.sh && npm run fetch-firebase-web-config",
+    "fetch-firebase-web-config": "node ./scripts/create.config.files.js $npm_package_config_projectName $npm_package_config_webAppName",
+    "postinstall": "npm run decode-firebase-config"
   },
   "eslintConfig": {
     "extends": "react-app"
