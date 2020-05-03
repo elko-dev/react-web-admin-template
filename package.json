@@ -33,14 +33,13 @@
     "typescript": "^3.7.0-beta"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run decode-firebase-config && react-scripts start",
     "serve": "./scripts/serve.sh",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false --passWithNoTests",
     "eject": "react-scripts eject",
     "decode-firebase-config": "./scripts/secret_decode.sh && npm run fetch-firebase-web-config",
-    "fetch-firebase-web-config": "node ./scripts/create.config.files.js $npm_package_config_projectName $npm_package_config_webAppName",
-    "postinstall": "npm run decode-firebase-config"
+    "fetch-firebase-web-config": "node ./scripts/create.config.files.js $npm_package_config_projectName $npm_package_config_webAppName"
   },
   "eslintConfig": {
     "extends": "react-app"
