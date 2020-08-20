@@ -65,3 +65,4 @@ build/
 local.env
 src/config/web-spawn-platform.json
 config/spawn-platform.json
+.scannerwork 

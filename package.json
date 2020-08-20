@@ -57,6 +57,7 @@
     ]
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.11.2"
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "sonarqube-scanner": "^2.7.0"
   }
 }
