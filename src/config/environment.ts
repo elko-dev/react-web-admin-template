@@ -1,5 +1,7 @@
 const key: string | undefined = process.env.REACT_APP_ENV;
 
+export const env = key || 'local';
+
 type urlOptions = {
     [key: string]: string
 }
@@ -8,11 +10,10 @@ const urlMap: urlOptions = {
     'dev': '<DEV_BASE_URL>',
     'stage': '<STAGE_BASE_URL>',
     'prod': '<PROD_BASE_URL>'
-}
+};
 
 
 export const environment = {
-
     apiBase: getUrl(),
 };
 
