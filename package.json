@@ -30,7 +30,8 @@
     "redux-thunk": "^2.3.0",
     "request-promise": "^4.2.5",
     "serve": "^11.3.0",
-    "typescript": "^3.7.0-beta"
+    "typescript": "^3.7.0-beta",
+    "moment": "latest"
   },
   "scripts": {
     "start": "npm run decode-firebase-config && react-scripts start",
