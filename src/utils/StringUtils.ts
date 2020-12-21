@@ -38,18 +38,7 @@ export const stringToBoolean = (str: Str): boolean => {
 export const isBoolean = (str: Str): boolean => stringToBoolean(str);
 
 export const isBool = (str: Str): boolean => stringToBoolean(str);
-
-export const isValidEmail = (email: Str): boolean => {
-  if (email) {
-    const regex: RegExp = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-    const string: string = String(email).toLowerCase().trim();
-    const match = string.match(regex);
-    return !!match && string.includes('.') && string.includes('@');
-  } else {
-    return false;
-  }
-};
 //Replaces non number digits plus neg and decimal points
-export const replaceNonNumber = (str: string): number => {
-  return +str.replace(/[^\d.-]/g, '');
-};
+
+//Replaces non number digits plus neg and decimal points
+export const replaceNonNumber = (str: string): number => +str.replace(/[^\d.-]/g, '');

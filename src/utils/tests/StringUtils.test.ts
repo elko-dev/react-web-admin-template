@@ -1,7 +1,6 @@
 import {
   isBool,
   isBoolean,
-  isValidEmail,
   replaceNonNumber,
   stringToBoolean,
 } from '../StringUtils';
@@ -31,18 +30,7 @@ describe('StringUtils', () => {
       expect(stringToBoolean).toEqual(true);
     });
   });
-  describe('isValidEmail', () => {
-    it('Is not valid email', async () => {
-      const email = isValidEmail('d.dd.dd');
-      expect(email).toEqual(false);
-    });
-  });
-  describe('isValidEmail', () => {
-    it('Is valid email', async () => {
-      const email = isValidEmail('c.porth@elko.dev');
-      expect(email).toEqual(true);
-    });
-  });
+
   describe('replaceNonNumber', () => {
     it('Replaces non numbers in a string', async () => {
       const num = replaceNonNumber('-2000.99M');

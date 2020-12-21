@@ -4,26 +4,26 @@ type DateType = Date | Moment | string;
 type DateTimeType = DateFormat | TimeFormat | DateTimeFormat;
 
 export type WeekDaysFullType =
-  | 'sunday'
-  | 'monday'
-  | 'tuesday'
-  | 'wednesday'
-  | 'thursday'
-  | 'friday'
-  | 'saturday';
+    | 'sunday'
+    | 'monday'
+    | 'tuesday'
+    | 'wednesday'
+    | 'thursday'
+    | 'friday'
+    | 'saturday';
 export type MonthsFullType =
-  | 'january'
-  | 'february'
-  | 'march'
-  | 'april'
-  | 'may'
-  | 'june'
-  | 'july'
-  | 'august'
-  | 'september'
-  | 'october'
-  | 'november'
-  | 'december';
+    | 'january'
+    | 'february'
+    | 'march'
+    | 'april'
+    | 'may'
+    | 'june'
+    | 'july'
+    | 'august'
+    | 'september'
+    | 'october'
+    | 'november'
+    | 'december';
 type MonthsNumbersType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 const moment = importMoment;
@@ -62,28 +62,23 @@ export enum TimeFormat {
 }
 
 //Human To Unix time
-export const humanToUnixTime = (date: DateType = new Date()): number => {
-  return moment(date).unix();
-};
+export const humanToUnixTime = (date: DateType = new Date()): number => moment(date).unix();
 export const stringToDate = (
-  strDate: string,
-  format: DateTimeType,
-  toDateOrMoment: boolean = true
+    strDate: string,
+    format: DateTimeType,
+    toDateOrMoment: boolean = true
 ): Date | Moment => {
   const date = moment(strDate, format);
   return toDateOrMoment ? date.toDate() : date;
 };
 //Date to date format for region
-export const dateToLocale = (date: DateType = new Date()): string => {
-  return moment(date).format('L');
-};
-export const dateTimeToLocale = (date: DateType = new Date()): string => {
-  return moment(date).format('LLLL');
-};
+export const dateToLocale = (date: DateType = new Date()): string => moment(date).format('L');
+
+export const dateTimeToLocale = (date: DateType = new Date()): string => moment(date).format('LLLL');
 //Unix time to human time and date
 export const unixTimeToHumanDateTime = (
-  unixTime: number,
-  format: DateTimeType = DateFormat.locate
+    unixTime: number,
+    format: DateTimeType = DateFormat.locate
 ): string => {
   const date = moment.unix(unixTime).subtract('M', 1);
   if (format !== DateFormat.locate) {
@@ -97,8 +92,8 @@ export const convertMilitaryCivilianTime = (input: string): string => {
   const is24HourRegex = /([01]?[0-9]|2[0-3]):[0-5][0-9]/;
   try {
     if (
-      !!input.toLowerCase().match(/am|pm/i) ||
-      input.toLowerCase().match(/[ap]/i)
+        !!input.toLowerCase().match(/am|pm/i) ||
+        input.toLowerCase().match(/[ap]/i)
     ) {
       return moment(input, TimeFormat.civilian).format(TimeFormat.military);
     } else {
@@ -119,8 +114,8 @@ export const isMilitaryTime = (): boolean => {
 
   //apparently toLocaleTimeString() has a bug in Chrome. toString() however returns 12/24 hour formats. If one of two contains AM/PM execute 12 hour coding.
   return !(
-    !!dateString.toLowerCase().match(/am|pm/i) ||
-    !!date.toString().toLowerCase().match(/am|pm/i)
+      !!dateString.toLowerCase().match(/am|pm/i) ||
+      !!date.toString().toLowerCase().match(/am|pm/i)
   );
 };
 export const monthNumberToMonthString = (month: MonthsNumbersType): string => {
@@ -176,32 +171,28 @@ export const convertFullDayToShortDay = (fullDay: WeekDaysFullType): string => {
 };
 
 export const weekDaySorting = {
-  sunday: 0, // << if sunday is first day of week
-  monday: 1,
-  tuesday: 2,
-  wednesday: 3,
-  thursday: 4,
-  friday: 5,
-  saturday: 6,
+  "sunday": 0, // << if sunday is first day of week
+  "monday": 1,
+  "tuesday": 2,
+  "wednesday": 3,
+  "thursday": 4,
+  "friday": 5,
+  "saturday": 6,
   // "sunday": 7
 };
 export const monthSorting = {
-  january: 0,
-  february: 1,
-  march: 2,
-  april: 3,
-  may: 4,
-  june: 5,
-  july: 6,
-  august: 7,
-  september: 8,
-  october: 9,
-  november: 10,
-  december: 11,
+  "january": 0,
+  "february": 1,
+  "march": 2,
+  "april": 3,
+  "may": 4,
+  "june": 5,
+  "july": 6,
+  "august": 7,
+  "september": 8,
+  "october": 9,
+  "november": 10,
+  "december": 11,
 };
-export const simpleWeekDaySort = (a: WeekDaysFullType, b: WeekDaysFullType) => {
-  return weekDaySorting[a] - weekDaySorting[b];
-};
-export const simpleMonthSort = (a: MonthsFullType, b: MonthsFullType) => {
-  return monthSorting[a] - monthSorting[b];
-};
+export const simpleWeekDaySort = (a: WeekDaysFullType, b: WeekDaysFullType):number => weekDaySorting[a] - weekDaySorting[b];
+export const simpleMonthSort = (a: MonthsFullType, b: MonthsFullType):number => monthSorting[a] - monthSorting[b];
