@@ -74,7 +74,7 @@ export default class Log {
     }
   };
   private static backgroundTask = async (data) => {
-    return new Promise(async resolve => {
+    return new Promise( resolve => {
       (typeof data === 'function') ? data() : data;
       resolve(true);
     }).catch((e) => console.error(e));

@@ -1,6 +1,6 @@
 type MultiplesOf10 = 1 | 10 | 100 | 1000 | 10000 | 100000 | 1000000;
 
-export const isDivisable = (x: number, diviser: number) => x % diviser === 0;
+export const isDivisable = (x: number, diviser: number):boolean => x % diviser === 0;
 export const numberIsInteger = (number: number): boolean => isDivisable(number, 1);
 export const isEven = (x: number): boolean => isDivisable(x, 2);
 export const isMultipleOfTen = (x: number): boolean => isDivisable(x, 10);
