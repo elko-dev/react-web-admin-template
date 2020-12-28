@@ -7,8 +7,8 @@ export const isMultipleOfTen = (x: number): boolean => isDivisable(x, 10);
 export const isMultipleOf100 = (x: number): boolean => isDivisable(x, 100);
 export const floorFigure = (num: number, place: MultiplesOf10): number => Math.round((num + Number.EPSILON) * place) / place;
 
-export const randomArbitrary = (min: number, max: number) => Math.random() * (max - min) + min;
-export const randomNumber = (min: number, max: number) => {
+export const randomArbitrary = (min: number, max: number):number => Math.random() * (max - min) + min;
+export const randomNumber = (min: number, max: number):number => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
